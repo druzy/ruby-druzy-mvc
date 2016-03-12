@@ -18,9 +18,9 @@ Or install it yourself as:
     $ gem install druzy-mvc
 
 Or for ubuntu run:
-sudo add-apt-repository ppa:druzy_druzy/rubymita
-sudo apt-get update
-sudo apt-get install ruby-druzy-mvc
+    $ sudo add-apt-repository ppa:druzy_druzy/rubymita
+    $ sudo apt-get update
+    $ sudo apt-get install ruby-druzy-mvc
 
 ## Usage
 
