@@ -5,11 +5,10 @@ module Druzy
   
   module MVC
     class Controller
-      attr_reader :views, :model
+      attr_reader :views
       attr_accessor :model
       
       def initialize(model)
-        super
         @model=model
         @views=[]
       end
@@ -42,14 +41,13 @@ module Druzy
         end
       end  
               
-      def notify_action(view,action,kwargs)
+      def notify_action(view,action,kwargs={})
       end            
     end
     
     class Model
   
       def initialize
-        super
         @listeners=[]
       end
           
@@ -69,6 +67,7 @@ module Druzy
     end
     
     class View
+      attr_accessor :controller
   
       def initialize(controller)
         @controller=controller
