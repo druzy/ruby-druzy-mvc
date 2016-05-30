@@ -1,3 +1,5 @@
+require 'druzy/mvc'
+
 module Druzy
   module MVC
     

@@ -1,6 +1,5 @@
 require "druzy/mvc/version"
 require "druzy/mvc/event"
-require "druzy/mvc/mvc_with_result"
 
 module Druzy
   
