@@ -66,10 +66,11 @@ module Druzy
       end
     end
     
-    class View
+    class View < Druzy::MVC::PropertyChangeListener
       attr_accessor :controller
   
       def initialize(controller)
+        super()
         @controller=controller
       end
             
@@ -86,8 +87,6 @@ module Druzy
       def on_top
       end
           
-      def property_change(property_change_event)
-      end        
     end
   end
   
