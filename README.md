@@ -1,5 +1,8 @@
 # Druzy::Mvc
 
+## Dependency
+
+java is necessary if you use java_view
 
 ## Installation
 
