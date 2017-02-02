@@ -2,12 +2,22 @@ require_relative '../mvc'
 
 require 'json'
 require 'open3'
+require 'os'
 
 module Druzy
   module MVC
 
     class JavaView < View
 
+      if (OS.windows?)
+        CLASSPTH_SEP = ';'
+        GSON = 
+      else
+        CLASSPTH_SEP = ':'
+        GSON = '/usr/share/java/gson.jar'
+      end
+      
+      
       def initialize(controller, dir_java, name_java_class)
         super(controller)
 
