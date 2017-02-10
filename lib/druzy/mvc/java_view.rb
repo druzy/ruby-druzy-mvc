@@ -1,7 +1,7 @@
 require_relative '../mvc'
 
-require 'json'
 require 'open3'
+require 'xmlsimple'
 
 module Druzy
   module MVC
@@ -16,13 +16,14 @@ module Druzy
         @stdin , @stdout, @sterr = Open3.popen3('java -cp '+@dir_java+' '+@name_java_class)
 
         Thread.new do
-          hash = JSON.parse(@stdout.gets)
-          while hash['action'] != 'exit' do
-            hash['kwargs'] ||= {}
+          hash = XmlSimple.xml_in(@stdout.gets, :ForceArray = false, :KeyToSymbol => true)
+
+          while hash[:action] != 'exit' do
+            hash[:kwargs] ||= {}
             Thread.new do
-              @controller.notify_action(self,hash['action'].to_sym,hash['kwargs'])
+              @controller.notify_action(self,hash[:action],hash[:kwargs])
             end
-            hash = JSON.parse(@stdout.gets)
+            hash = XmlSimple.xml_in(@stdout.gets, :ForceArray = false, :KeyToSymbol => true)
           end
           @stdin.close
           @sterr.close
@@ -31,11 +32,11 @@ module Druzy
       end
 
       def display
-        @stdin.puts({:action => 'display'}.to_json)
+        @stdin.puts(XmlSimple.xml_out({:action => 'display'}, :RootName => 'root', :AttrPrefix => true, :NoIndent => true))
       end
 
       def close
-        @stdin.puts({:action => 'exit'}.to_json)
+        @stdin.puts(XmlSimple.xml_out({:action => 'exit'}, :RootName => 'root', :AttrPrefix => true, :NoIndent => true))
       end
 
     end
