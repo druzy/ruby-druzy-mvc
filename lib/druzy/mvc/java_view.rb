@@ -16,14 +16,14 @@ module Druzy
         @stdin , @stdout, @sterr = Open3.popen3('java -cp '+@dir_java+' '+@name_java_class)
 
         Thread.new do
-          hash = XmlSimple.xml_in(@stdout.gets, :ForceArray = false, :KeyToSymbol => true)
+          hash = XmlSimple.xml_in(@stdout.gets, :ForceArray => false, :KeyToSymbol => true)
 
           while hash[:action] != 'exit' do
             hash[:kwargs] ||= {}
             Thread.new do
               @controller.notify_action(self,hash[:action],hash[:kwargs])
             end
-            hash = XmlSimple.xml_in(@stdout.gets, :ForceArray = false, :KeyToSymbol => true)
+            hash = XmlSimple.xml_in(@stdout.gets, :ForceArray => false, :KeyToSymbol => true)
           end
           @stdin.close
           @sterr.close
