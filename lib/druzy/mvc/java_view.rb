@@ -21,7 +21,7 @@ module Druzy
           while hash[:action] != 'exit' do
             hash[:kwargs] ||= {}
             Thread.new do
-              @controller.notify_action(self,hash[:action],hash[:kwargs])
+              @controller.notify_action(self,hash[:action].to_sym,hash[:kwargs])
             end
             hash = XmlSimple.xml_in(@stdout.gets, :ForceArray => false, :KeyToSymbol => true)
           end
