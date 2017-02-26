@@ -1,4 +1,4 @@
-require_relative '../mvc'
+require_relative 'view'
 
 require 'open3'
 require 'xmlsimple'

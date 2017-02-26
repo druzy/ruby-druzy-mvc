@@ -1,5 +1,5 @@
 module Druzy
   module MVC
-    VERSION = "1.4.0.3"
+    VERSION = "1.5.0"
   end
 end
