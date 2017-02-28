@@ -13,7 +13,7 @@ module Druzy
         @builder = Gtk::Builder.new
         @builder.add_from_file(ui_file)
 
-        @window = builder.get_object('window')
+        @window = @builder.get_object('window')
         @window.signal_connect('delete-event') do
           Thread.new do
             @controller.notify_action(self,:cross_clicked)
